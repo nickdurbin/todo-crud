@@ -21,7 +21,7 @@ function App() {
     } else {
       localStorage.setItem('tasks', JSON.stringify(tasks));
     }
-  }, [tasks.length])
+  }, [tasks])
 
   function toggleComplete(id) {
     const updatedTasks = tasks.map(task => {
@@ -34,11 +34,16 @@ function App() {
     setTasks(updatedTasks);
   }
 
+  function deleteCompleted() {
+    const updatedTasks = tasks.filter(task => !task.completed)
+    setTasks(updatedTasks)
+  }
+
   return (
     <div className="App">
       <Switch>
         <Route path='/addtask' render={props => <TaskForm {...props} setTasks={setTasks} tasks={tasks} />} />
-        <Route exact path='/' render={props => <TaskList {...props} tasks={tasks} toggle={toggleComplete} />} />
+        <Route exact path='/' render={props => <TaskList {...props} tasks={tasks} toggle={toggleComplete} deleteCompleted={deleteCompleted} />} />
       </Switch>
     </div>
   );
