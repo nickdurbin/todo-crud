@@ -1,25 +1,28 @@
 import React, { useState } from 'react'
 
-function TaskForm() {
-  const [form, setForm] = useState({
+function TaskForm({ setTasks, tasks}) {
+  const [formValues, setFormValues] = useState({
     id: Date.now(),
     task: '',
     isCompleted: false
   })
 
   const handleChange = (e) => {
-    setForm({...form, [e.target.name]: e.target.value})
+    setFormValues({...formValues, [e.target.name]: e.target.value})
   }
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    console.log(form);
+    setFormValues({...formValues, id: Date.now()})
+    setTasks([...tasks])
+    console.log(formValues);
   }
 
   return (
     <div>
       <form onSubmit={handleSubmit}>
-        <input name="task" value={form.task} onChange={handleChange}></input>
+        <h1>Task Manager</h1>
+        <input name="task" value={formValues.task} onChange={handleChange} placeholder='Add Task...'></input>
       </form>
     </div>
   )
