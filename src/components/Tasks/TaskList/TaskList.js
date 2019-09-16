@@ -1,11 +1,19 @@
 import React from 'react';
 import Task from './Task';
+import { Link } from 'react-router-dom'
 
-function TaskList() {
-  const tempArr = [1,2,3]
+function TaskList({ tasks, toggle }) {
+  
   return (
     <div>
-      {tempArr.map(number => <Task key={number} number={number} />)}
+      <ul>
+        {tasks.map(task => <Task key={task.id} task={task} toggle={toggle} />)}
+      </ul>
+      <button>
+        <Link to='/addtask'>
+          Add Task
+        </Link>
+      </button>
     </div>
   )
 }

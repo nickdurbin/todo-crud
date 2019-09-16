@@ -1,10 +1,10 @@
 import React from 'react';
 
-function Task({number}) {
+function Task({ task, toggle }) {
   return (
-    <div>
-      <p>{number}</p>
-    </div>
+    <li onClick={() => toggle(task.id)}>
+      {task.completed ? <del>{`${task.task}`}</del> : `${task.task}`}
+    </li>
   )
 }
 
